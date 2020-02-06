@@ -133,10 +133,10 @@
         <image name="location.circle" catalog="system" width="64" height="60"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <namedColor name="WeatherDarkOrange">
-            <color red="0.97751376300000004" green="0.97751376300000004" blue="0.97751376300000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.9779999852180481" green="0.9779999852180481" blue="0.9779999852180481" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="WeatherViewViolet">
-            <color red="0.1853255033" green="0.029022607950000001" blue="0.43924486639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.18500000238418579" green="0.028999999165534973" blue="0.43900001049041748" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>
