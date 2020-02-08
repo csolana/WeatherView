@@ -16,6 +16,8 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
     
+    
+    let weatherManager = WeatherManager()
     //Remember to change bg images to vectors
     
     
@@ -51,6 +53,10 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if let city = searchTextField.text {
+            weatherManager.fetchWeather(cityName: city)
+        }
         
         searchTextField.text = ""
     }
