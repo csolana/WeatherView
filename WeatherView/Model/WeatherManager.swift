@@ -8,33 +8,30 @@
 
 import UIKit
 
+
 struct WeatherManager {
     
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=3e5dafce21e4b0aaf128673f7df50e94&units=metric"
     
-    func fetchWeather (cityName: String) {
+    func fetchWeather(cityName: String) {
         
         let urlString = "\(weatherURL)&q=\(cityName)"
         performRequest(urlString: urlString)
     }
     
     func performRequest(urlString: String) {
-        //Here we apply the Networking Steps:
+        //Networking Steps:
         //1. Create a URL
-        
         if let url = URL(string: urlString) {
             //2. Create a URLSession
             let session = URLSession(configuration: .default)
-            
             //3. Give the URLSession a task
             let task = session.dataTask(with: url, completionHandler: handle(data:response:error:))
-            
-            //4. Start the task
+            //4. Sytart the task
             task.resume()
-            
         }
-        
     }
+    
     
     func handle(data: Data?, response: URLResponse?, error: Error?) {
         
@@ -45,10 +42,8 @@ struct WeatherManager {
         
         if let safeData = data {
             let dataString = String(data: safeData, encoding: .utf8)
-            print("\(dataString)")
-            
+            print(dataString!)
         }
     }
-    
     
 }

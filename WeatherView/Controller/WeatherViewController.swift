@@ -15,8 +15,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var degreesLabel: UILabel!
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
-    
-    
+
     let weatherManager = WeatherManager()
     //Remember to change bg images to vectors
     
@@ -48,8 +47,6 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
             textField.placeholder = "Write something dude!"
             return false
         }
-        
-        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
