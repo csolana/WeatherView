@@ -8,39 +8,39 @@
 
 import UIKit
 
-
 struct WeatherManager {
-    
+    //make a constant e.g. "weatherURL" to hold the api string
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=3e5dafce21e4b0aaf128673f7df50e94&units=metric"
     
+    //make a function e.g."fetchWeather" to fetch the weather with a parameter e.g."cityName" of type string
     func fetchWeather(cityName: String) {
-        
+        //inside make a constant e.g."urlString" to trail the "cityName" to the it using string interpolation
         let urlString = "\(weatherURL)&q=\(cityName)"
-        performRequest(urlString: urlString)
+        requestWeather(stringURL: urlString)
     }
-    
-    func performRequest(urlString: String) {
-        //Networking Steps:
-        //1. Create a URL
-        if let url = URL(string: urlString) {
-            //2. Create a URLSession
+    //create a function e.g."requestWeather" to request the weather that takes "urlString" as parameter of type String to hold the networking steps. Use this function in fetchWeather() to request and pass "urlString" as parameter
+    func requestWeather(stringURL: String) {
+        //networking:
+        //create url using if let statement
+        if let url = URL(string: stringURL) {
+            //create a session url
             let session = URLSession(configuration: .default)
-            //3. Give the URLSession a task
+            //give session a task
             let task = session.dataTask(with: url, completionHandler: handle(data:response:error:))
-            //4. Sytart the task
+            //resume task
             task.resume()
         }
     }
     
-    
     func handle(data: Data?, response: URLResponse?, error: Error?) {
-        
+        //create a func "handle(data: Data?, response: URLResponse?, error: Error?)" check for errors if there is print them then return to end method, use it as completionHandler
         if error != nil {
             print(error!)
             return
         }
-        
-        if let safeData = data {
+        //create a constant to check if data is safe
+        if let safeData =  data {
+            //convert data to string, look for a string method that takes data
             let dataString = String(data: safeData, encoding: .utf8)
             print(dataString!)
         }

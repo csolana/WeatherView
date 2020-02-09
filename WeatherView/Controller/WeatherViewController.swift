@@ -16,9 +16,9 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
 
-    let weatherManager = WeatherManager()
     //Remember to change bg images to vectors
-    
+    //call WeatherManager()
+    let weatherManager = WeatherManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,13 +44,13 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         if textField.text != "" {
             return true
         } else {
-            textField.placeholder = "Write something dude!"
+            textField.placeholder = "Write something!"
             return false
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+        //create a constant e.g."city" and use an if let statement to pass the typed value from the searchTextField
         if let city = searchTextField.text {
             weatherManager.fetchWeather(cityName: city)
         }
