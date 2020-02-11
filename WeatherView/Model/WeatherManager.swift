@@ -15,7 +15,8 @@ struct WeatherManager {
     //make a function e.g."fetchWeather" to fetch the weather with a parameter e.g."cityName" of type string
     func fetchWeather(cityName: String) {
         //inside make a constant e.g."urlString" to trail the "cityName" to the it using string interpolation
-        let urlString = "\(weatherURL)&q=\(cityName)"
+        let urlStringCity = "\(weatherURL)&q=\(cityName)"
+        let urlString = urlStringCity.replacingOccurrences(of: " ", with: "+")
         requestWeather(stringURL: urlString)
     }
     //create a function e.g."requestWeather" to request the weather that takes "urlString" as parameter of type String to hold the networking steps. Use this function in fetchWeather() to request and pass "urlString" as parameter
@@ -25,25 +26,49 @@ struct WeatherManager {
         if let url = URL(string: stringURL) {
             //create a session url
             let session = URLSession(configuration: .default)
-            //give session a task
-            let task = session.dataTask(with: url, completionHandler: handle(data:response:error:))
+            //give session a task, later convert it into a closure and delete the hanle method
+            let task = session.dataTask(with: url) { (data, response, error) in
+                //check for errors
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                //create a constant to check if data is safe
+                if let safeData =  data {
+                    //convert data to string, look for a string method that takes data
+//                    let dataString = String(data: safeData, encoding: .utf8)
+//                    print(dataString!)
+                    self.parseJSON(weatherData: safeData)
+                }
+            }
             //resume task
             task.resume()
         }
     }
     
-    func handle(data: Data?, response: URLResponse?, error: Error?) {
-        //create a func "handle(data: Data?, response: URLResponse?, error: Error?)" check for errors if there is print them then return to end method, use it as completionHandler
-        if error != nil {
-            print(error!)
-            return
+    //create a parseJSON object with input e.g."weatherData"
+    func parseJSON(weatherData: Data) {
+        //inform xcode how data is structured, so we use a structure, create a decoder for JSON and initialise it using JSONDecoder()
+        let decoder = JSONDecoder()
+        // use the decoder, use the WeatherData.self as data type and weatherData input as Data, mark it with "try" and put it inside a "do" block, then use a "catch" block to cartch the error. Then use "let" to create a WeatherData object: "decodedData",
+        do {
+        let decodedData = try decoder.decode(WeatherData.self, from: weatherData)
+            //tap into name inside a print statement
+            let id = decodedData.weather[0].id
+            let name = decodedData.name
+            let temp = decodedData.main.temp
+            
+            
+            let weather = WeatherModel(conditionID: id, cityName: name, temperature: temp)
+            
+            print(weather.getConditionName(weatherID: id))
+        } catch {
+            print(error)
         }
-        //create a constant to check if data is safe
-        if let safeData =  data {
-            //convert data to string, look for a string method that takes data
-            let dataString = String(data: safeData, encoding: .utf8)
-            print(dataString!)
-        }
+        
     }
+    
+
+    
     
 }

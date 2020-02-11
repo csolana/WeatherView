@@ -55,7 +55,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
             weatherManager.fetchWeather(cityName: city)
         }
         
-        searchTextField.text = ""
+        searchTextField.text = ""   
     }
 }
 
