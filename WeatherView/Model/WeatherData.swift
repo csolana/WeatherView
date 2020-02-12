@@ -8,14 +8,14 @@
 
 import UIKit
 // make a structure called as the file, and conforme it to swift's Decodable protocol
-struct WeatherData: Decodable {
+struct WeatherData: Codable {
     //create constant of api parameters wanted e.g."name" of type String
     let name: String
     let main: Main
     let weather: [Weather]
 }
 
-struct Main: Decodable {
+struct Main: Codable {
 
     let temp: Double
     let feels_like: Double
@@ -25,7 +25,7 @@ struct Main: Decodable {
     let humidity: Double
 }
 
-struct Weather: Decodable {
+struct Weather: Codable {
     
     let description: String
     let id: Int

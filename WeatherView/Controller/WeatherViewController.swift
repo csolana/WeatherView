@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController, UITextFieldDelegate {
+class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
 
     @IBOutlet weak var weatherConditionImage: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -18,10 +18,12 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
 
     //Remember to change bg images to vectors
     //call WeatherManager()
-    let weatherManager = WeatherManager()
+    var weatherManager = WeatherManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        weatherManager.delegate = self
         // let know delegate that this is the VC
         searchTextField.delegate = self
         
@@ -57,5 +59,14 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         
         searchTextField.text = ""   
     }
+    
+    func didUpdateWeather(weatherManager: WeatherManager, weather: WeatherModel) {
+        print(weather.temperature)
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+    
 }
 
