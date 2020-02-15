@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 protocol WeatherManagerDelegate {
     func didUpdateWeather(weatherManager: WeatherManager, weather: WeatherModel)
@@ -18,13 +19,19 @@ struct WeatherManager {
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=3e5dafce21e4b0aaf128673f7df50e94&units=metric"
     
     var delegate: WeatherManagerDelegate?
-    
+        
     //make a function e.g."fetchWeather" to fetch the weather with a parameter e.g."cityName" of type string
     func fetchWeather(cityName: String) {
         //inside make a constant e.g."urlString" to trail the "cityName" to the it using string interpolation
         let urlStringCity = "\(weatherURL)&q=\(cityName)"
         let urlString = urlStringCity.replacingOccurrences(of: " ", with: "+")
         requestWeather(with: urlString)
+    }
+    
+    func fetchWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        let urlString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
+        requestWeather(with: urlString)
+    
     }
     //create a function e.g."requestWeather" to request the weather that takes "urlString" as parameter of type String to hold the networking steps. Use this function in fetchWeather() to request and pass "urlString" as parameter
     func requestWeather(with stringURL: String) {
