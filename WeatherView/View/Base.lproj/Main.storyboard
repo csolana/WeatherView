@@ -33,6 +33,9 @@
                                                 </constraints>
                                                 <color key="tintColor" name="WeatherViewViolet"/>
                                                 <state key="normal" backgroundImage="location.circle" catalog="system"/>
+                                                <connections>
+                                                    <action selector="locationPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z1A-fK-2q3"/>
+                                                </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Lan-SQ-zgK">
                                                 <rect key="frame" x="46" y="0.0" width="282" height="40"/>
